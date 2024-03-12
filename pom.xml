@@ -11,7 +11,7 @@
     <groupId>com.rok.faker</groupId>
     <artifactId>performance-api-rest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>performance-api-rest</name>
     <description>performance-api-rest</description>
     <properties>
