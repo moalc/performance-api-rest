@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.List;
 @RequestMapping("/api/players")
 @CrossOrigin(origins = "http://localhost:4200") // Especifica el origen permitido
 public class PlayerController {
+
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     @Autowired
     private PlayerService playerService;
@@ -48,8 +51,8 @@ public class PlayerController {
     }
 
     @GetMapping("/calculateDateFromID")
-    public LocalDateTime calculateDateFromID(@Param("id") String id) {
-        return getInitDate(id);
+    public ResponseEntity<String> calculateDateFromID(@Param("id") String id) {
+        return ResponseEntity.ok(getInitDate(id).format(dateTimeFormatter));
     }
 
     private long calculateDaysFromID(String id) {
