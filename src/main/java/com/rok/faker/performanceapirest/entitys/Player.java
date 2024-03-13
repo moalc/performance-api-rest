@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -17,7 +17,7 @@ public class Player {
     private String name;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private Timestamp initDate;
+    private LocalDateTime initDate;
 
     private int vip;
 
