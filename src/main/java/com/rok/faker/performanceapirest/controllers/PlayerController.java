@@ -3,6 +3,7 @@ package com.rok.faker.performanceapirest.controllers;
 import com.rok.faker.performanceapirest.entitys.Player;
 import com.rok.faker.performanceapirest.objects.PlayerFound;
 import com.rok.faker.performanceapirest.services.PlayerService;
+import com.rok.faker.performanceapirest.services.TesseractService;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -25,6 +26,9 @@ public class PlayerController {
 
     @Autowired
     private PlayerService playerService;
+
+    @Autowired
+    private TesseractService tesseractService;
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Player>> getListAllPlayers() {
@@ -53,6 +57,11 @@ public class PlayerController {
     @GetMapping("/calculateDateFromID")
     public ResponseEntity<String> calculateDateFromID(@Param("id") String id) {
         return ResponseEntity.ok(getInitDate(id).format(dateTimeFormatter));
+    }
+
+    @GetMapping("/speedups")
+    public ResponseEntity<String> calculateSpeedups(@Param("imageName") String imageName) {
+        return ResponseEntity.ok(tesseractService.extractTestFromImage("/home/pedro/Descargas/" + imageName));
     }
 
     private long calculateDaysFromID(String id) {
